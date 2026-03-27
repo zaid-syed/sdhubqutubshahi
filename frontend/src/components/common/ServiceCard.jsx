@@ -12,11 +12,14 @@ const iconMap = {
   Award
 };
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, onClick }) => {
   const Icon = iconMap[service.icon];
 
   return (
-    <Card className="hover:shadow-xl transition-all duration-300 border border-gray-200 group bg-white h-full">
+    <Card 
+      className="hover:shadow-xl transition-all duration-300 border border-gray-200 group bg-white h-full cursor-pointer"
+      onClick={onClick}
+    >
       <CardHeader className="text-center">
         <div className="mx-auto mb-4 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
           <Icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
@@ -33,6 +36,10 @@ const ServiceCard = ({ service }) => {
         <Button 
           variant="link" 
           className="text-blue-600 hover:text-blue-700 font-medium"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
         >
           View Details →
         </Button>
