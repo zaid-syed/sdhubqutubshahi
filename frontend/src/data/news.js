@@ -23,7 +23,7 @@ export const news = [
     title: 'Graduation day',
     date: '18-10-2025',
     category: 'All students are requested to attend',
-    image: '/assets/images/graduation.jpg',
+    image: '/assets/images/news-graduation.jpg',
     excerpt: 'Certification and graduation ceremony for our successful students.',
     content: 'All the students are requested to come on the certification/graduation day. Celebrate your achievements with us!'
   },

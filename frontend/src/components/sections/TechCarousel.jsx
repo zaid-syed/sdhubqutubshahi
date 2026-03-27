@@ -32,22 +32,40 @@ const TechCarousel = () => {
 
     let scrollAmount = 0;
     const scrollSpeed = 1; // pixels per frame
+    let isPaused = false;
 
     const scroll = () => {
-      scrollAmount += scrollSpeed;
-      
-      // Reset position seamlessly when reaching halfway (since we have duplicated content)
-      if (scrollAmount >= scrollContainer.scrollWidth / 2) {
-        scrollAmount = 0;
+      if (!isPaused) {
+        scrollAmount += scrollSpeed;
+        
+        // Reset position seamlessly when reaching halfway (since we have duplicated content)
+        if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+          scrollAmount = 0;
+        }
+        
+        scrollContainer.scrollLeft = scrollAmount;
       }
-      
-      scrollContainer.scrollLeft = scrollAmount;
       requestAnimationFrame(scroll);
     };
 
+    const handleMouseEnter = () => {
+      isPaused = true;
+    };
+
+    const handleMouseLeave = () => {
+      isPaused = false;
+    };
+
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+
     const animationId = requestAnimationFrame(scroll);
 
-    return () => cancelAnimationFrame(animationId);
+    return () => {
+      cancelAnimationFrame(animationId);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   return (
