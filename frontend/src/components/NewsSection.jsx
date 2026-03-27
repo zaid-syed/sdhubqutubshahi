@@ -2,8 +2,11 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Calendar } from 'lucide-react';
 import { news } from '../data/mockData';
+import { useNavigate } from 'react-router-dom';
 
 const NewsSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,6 +21,7 @@ const NewsSection = () => {
             <Card 
               key={item.id} 
               className="overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 group cursor-pointer"
+              onClick={() => navigate(`/news/${item.id}`)}
             >
               <div className="relative overflow-hidden h-48">
                 <img 
@@ -28,7 +32,7 @@ const NewsSection = () => {
               </div>
               
               <CardHeader>
-                <CardTitle className="text-lg font-bold text-gray-900">
+                <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                   {item.title}
                 </CardTitle>
               </CardHeader>

@@ -1,22 +1,22 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 import { Calendar, User } from 'lucide-react';
 import { courses } from '../data/mockData';
-import { useNavigate } from 'react-router-dom';
 
-const CoursesSection = () => {
+const Courses = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Delivering Job Oriented Training Programs
-          </h2>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Our Courses
+          </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            At SD Hub Qutubshahi, we offer a wide range of job-oriented training programs. Whether you are interested in coding, software development, digital marketing, Web Development, etc., we have a program that suits your profile and interest.
+            Explore our comprehensive range of job-oriented training programs designed to help you succeed in your career.
           </p>
         </div>
 
@@ -74,19 +74,9 @@ const CoursesSection = () => {
             </Card>
           ))}
         </div>
-
-        <div className="text-center mt-12">
-          <Button 
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg transition-all duration-300"
-            onClick={() => navigate('/courses')}
-          >
-            View All Courses
-          </Button>
-        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default CoursesSection;
+export default Courses;
