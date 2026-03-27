@@ -10,12 +10,12 @@ export const galleries = [
   },
   {
     id: 2,
-    title: 'Guest Speakers',
+    title: 'Tech Talks & Guest Sessions',
     images: [
-      '/assets/images/gallery/speaker-1.jpg',
-      '/assets/images/gallery/speaker-2.jpg',
-      '/assets/images/gallery/speaker-3.jpg',
-      '/assets/images/gallery/speaker-4.jpg'
+      '/assets/images/gallery/techtalks-1.jpg',  // Guest speaker presenting to students
+      '/assets/images/gallery/techtalks-2.jpg',  // Career guidance session with presentation
+      '/assets/images/gallery/techtalks-3.jpg',  // Panel discussion with industry experts
+      '/assets/images/gallery/techtalks-4.jpg'   // Interview skills seminar
     ]
   },
   {
@@ -26,16 +26,6 @@ export const galleries = [
       '/assets/images/gallery/teachers-2.jpg',
       '/assets/images/gallery/teachers-3.jpg',
       '/assets/images/gallery/teachers-4.jpg'
-    ]
-  },
-  {
-    id: 4,
-    title: 'Tech Talks & Guest Sessions',
-    images: [
-      '/assets/images/gallery/techtalks-1.jpg',
-      '/assets/images/gallery/techtalks-2.jpg',
-      '/assets/images/gallery/techtalks-3.jpg',
-      '/assets/images/gallery/techtalks-4.jpg'
     ]
   }
 ];
