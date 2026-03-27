@@ -4,8 +4,8 @@ export const galleries = [
     id: 1,
     title: 'Graduation Day',
     images: [
-      '/assets/images/gallery/graduation-1.jpg',
-      '/assets/images/gallery/graduation-2.jpg',
+      '/assets/images/gallery/graduation-1.jpg',  // Students with certificates - formal pose
+      '/assets/images/gallery/graduation-2.jpg',  // Large group photo with certificates
       '/assets/images/gallery/graduation-3.jpg',
       '/assets/images/gallery/graduation-4.jpg'
     ]
