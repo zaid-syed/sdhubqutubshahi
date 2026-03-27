@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Code2, Cloud, Database, FileCode, BarChart3, Server, TrendingUp, Search, FileText, Layers, BookOpen, Link, Workflow, Globe, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { Code2, Cloud, Database, FileCode, BarChart3, Server, TrendingUp, Search, FileText, Layers, BookOpen, Link, Workflow, Globe } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 
 const TechCarousel = () => {
   const scrollRef = useRef(null);
   const [selectedTech, setSelectedTech] = useState(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const autoScrollInterval = useRef(null);
 
   const technologies = [
     { name: 'Angular', Icon: Code2, description: 'Angular is a powerful TypeScript-based framework for building dynamic web applications.', use: 'Enterprise web applications, SPAs' },
@@ -27,38 +25,30 @@ const TechCarousel = () => {
     { name: 'Python', Icon: Workflow, description: 'Versatile programming language for data science and web development.', use: 'Data science, machine learning, automation' },
   ];
 
+  // Seamless infinite scroll
   useEffect(() => {
-    if (isAutoScrolling && scrollRef.current) {
-      autoScrollInterval.current = setInterval(() => {
-        if (scrollRef.current) {
-          const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-          const currentScroll = scrollRef.current.scrollLeft;
-          
-          if (currentScroll >= maxScroll - 10) {
-            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-            scrollRef.current.scrollBy({ left: 2, behavior: 'auto' });
-          }
-        }
-      }, 30);
-    }
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
 
-    return () => {
-      if (autoScrollInterval.current) {
-        clearInterval(autoScrollInterval.current);
+    let scrollAmount = 0;
+    const scrollSpeed = 1; // pixels per frame
+
+    const scroll = () => {
+      scrollAmount += scrollSpeed;
+      
+      // Reset position seamlessly when reaching halfway (since we have duplicated content)
+      if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+        scrollAmount = 0;
       }
+      
+      scrollContainer.scrollLeft = scrollAmount;
+      requestAnimationFrame(scroll);
     };
-  }, [isAutoScrolling]);
 
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 400;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
+    const animationId = requestAnimationFrame(scroll);
+
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
   return (
     <>
@@ -67,40 +57,37 @@ const TechCarousel = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900 animate-slide-down">
             Learn from 30+ Languages and Technologies
           </h2>
-          <p className="text-center text-gray-600 mb-4 animate-slide-down">
+          <p className="text-center text-gray-600 mb-8 animate-slide-down">
             Click on any technology to learn more
           </p>
           
-          <div className="flex justify-center items-center gap-2 mb-6">
-            <button
-              onClick={() => setIsAutoScrolling(!isAutoScrolling)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300"
-            >
-              {isAutoScrolling ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              <span className="text-sm font-medium">{isAutoScrolling ? 'Pause' : 'Play'}</span>
-            </button>
-          </div>
-          
           <div className="relative">
-            <button
-              onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-blue-50 transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="w-6 h-6 text-blue-600" />
-            </button>
-
+            {/* Scrollable Container - No arrows, seamless loop */}
             <div 
               ref={scrollRef}
-              className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth px-12"
+              className="flex gap-8 overflow-x-hidden px-4"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              onMouseEnter={() => setIsAutoScrolling(false)}
-              onMouseLeave={() => setIsAutoScrolling(true)}
             >
+              {/* First set */}
               {technologies.map((tech, index) => {
                 const Icon = tech.Icon;
                 return (
                   <div 
-                    key={index}
+                    key={`tech-1-${index}`}
+                    onClick={() => setSelectedTech(tech)}
+                    className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-32 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 cursor-pointer group"
+                  >
+                    <Icon className="w-12 h-12 text-blue-600 mb-2 group-hover:scale-110 transition-transform" />
+                    <span className="text-xs font-medium text-gray-700 text-center px-2">{tech.name}</span>
+                  </div>
+                );
+              })}
+              {/* Duplicate set for seamless loop */}
+              {technologies.map((tech, index) => {
+                const Icon = tech.Icon;
+                return (
+                  <div 
+                    key={`tech-2-${index}`}
                     onClick={() => setSelectedTech(tech)}
                     className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-32 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 cursor-pointer group"
                   >
@@ -110,13 +97,6 @@ const TechCarousel = () => {
                 );
               })}
             </div>
-
-            <button
-              onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-blue-50 transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="w-6 h-6 text-blue-600" />
-            </button>
           </div>
         </div>
       </section>

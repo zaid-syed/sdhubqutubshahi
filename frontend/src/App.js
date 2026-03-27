@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AnnouncementBar from './components/AnnouncementBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/toaster';
@@ -16,10 +15,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AnnouncementBar />
-        <div style={{ marginTop: '40px' }}>
-          <Header />
-        </div>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
