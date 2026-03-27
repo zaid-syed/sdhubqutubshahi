@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="md:col-span-1">
             <img 
-              src="https://sdhubqutubshahi.com/SD%20Hub%20Logo%20QS%20white.png" 
+              src="/assets/images/logo-white.png" 
               alt="SD Hub Logo" 
               className="h-16 w-auto mb-4 cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => navigate('/')}

@@ -1,10 +1,10 @@
 import React from 'react';
-import TechCarousel from '../components/TechCarousel';
-import CoursesSection from '../components/CoursesSection';
-import ServicesSection from '../components/ServicesSection';
-import StatsSection from '../components/StatsSection';
-import NewsSection from '../components/NewsSection';
-import GallerySection from '../components/GallerySection';
+import TechCarousel from '../components/sections/TechCarousel';
+import CoursesSection from '../components/sections/CoursesSection';
+import ServicesSection from '../components/sections/ServicesSection';
+import StatsSection from '../components/sections/StatsSection';
+import NewsSection from '../components/sections/NewsSection';
+import GalleriesSection from '../components/sections/GalleriesSection';
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <ServicesSection />
       <StatsSection />
       <NewsSection />
-      <GallerySection />
+      <GalleriesSection />
     </div>
   );
 };

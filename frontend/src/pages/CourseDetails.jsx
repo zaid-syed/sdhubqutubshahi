@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { courses } from '../data/mockData';
+import { getCourseById } from '../data/courses';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Calendar, User, Tag, Clock, BookOpen, ArrowLeft } from 'lucide-react';
+import { Calendar, User, Clock, BookOpen, ArrowLeft } from 'lucide-react';
 import ApplyModal from '../components/ApplyModal';
 
 const CourseDetails = () => {
@@ -11,7 +11,7 @@ const CourseDetails = () => {
   const navigate = useNavigate();
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   
-  const course = courses.find(c => c.id === parseInt(id));
+  const course = getCourseById(id);
 
   if (!course) {
     return (
@@ -71,14 +71,14 @@ const CourseDetails = () => {
                 <Clock className="w-5 h-5 mr-3 text-blue-600" />
                 <div>
                   <p className="text-sm text-gray-500">Duration</p>
-                  <p className="font-medium">{course.duration || '3-6 months'}</p>
+                  <p className="font-medium">{course.duration}</p>
                 </div>
               </div>
               <div className="flex items-center text-gray-700">
                 <BookOpen className="w-5 h-5 mr-3 text-blue-600" />
                 <div>
                   <p className="text-sm text-gray-500">Level</p>
-                  <p className="font-medium">Beginner to Advanced</p>
+                  <p className="font-medium">{course.level}</p>
                 </div>
               </div>
             </div>
@@ -121,11 +121,7 @@ const CourseDetails = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  {course.fullDescription || course.description}
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  This comprehensive program is designed to equip you with practical skills and industry-relevant knowledge. 
-                  Our hands-on approach ensures you're job-ready by the end of the course.
+                  {course.fullDescription}
                 </p>
               </CardContent>
             </Card>
@@ -136,13 +132,7 @@ const CourseDetails = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  {(course.topics || [
-                    'Fundamental concepts and best practices',
-                    'Industry-standard tools and technologies',
-                    'Hands-on projects and real-world applications',
-                    'Problem-solving and analytical skills',
-                    'Career preparation and interview techniques'
-                  ]).map((topic, index) => (
+                  {course.topics.map((topic, index) => (
                     <li key={index} className="flex items-start text-gray-700">
                       <span className="text-blue-600 mr-3 mt-1">✓</span>
                       <span>{topic}</span>
@@ -158,7 +148,7 @@ const CourseDetails = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                  {course.prerequisites || 'Basic computer knowledge and enthusiasm to learn. No prior experience required for beginners.'}
+                  {course.prerequisites}
                 </p>
               </CardContent>
             </Card>
@@ -190,7 +180,7 @@ const CourseDetails = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="bg-blue-100 rounded-full p-2 mr-3">
-                    <Tag className="w-5 h-5 text-blue-600" />
+                    <Calendar className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Certification</p>

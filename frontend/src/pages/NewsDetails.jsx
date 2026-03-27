@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { news } from '../data/mockData';
+import { news } from '../data/news';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Calendar, ArrowLeft, Tag } from 'lucide-react';
@@ -63,10 +63,14 @@ const NewsDetails = () => {
 
           <CardContent className="space-y-6">
             <p className="text-lg text-gray-700 leading-relaxed">
-              {newsItem.fullContent || newsItem.category}
+              {newsItem.excerpt}
             </p>
             
             <div className="prose max-w-none">
+              <p className="text-gray-700 leading-relaxed">
+                {newsItem.content}
+              </p>
+              
               <p className="text-gray-700 leading-relaxed">
                 We are excited to announce this new development at SD Hub Qutubshahi. 
                 This represents another step forward in our commitment to providing quality education and training opportunities.

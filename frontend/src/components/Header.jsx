@@ -27,7 +27,7 @@ const Header = () => {
             onClick={() => navigate('/')}
           >
             <img 
-              src="https://sdhubqutubshahi.com/SD%20Hub%20Logo%20Q%202.png" 
+              src="/assets/images/logo.png" 
               alt="SD Hub Qutubshahi" 
               className="h-12 w-auto"
             />
