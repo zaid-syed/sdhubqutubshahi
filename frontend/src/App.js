@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 import { Toaster } from './components/ui/toaster';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/news/:id" element={<NewsDetails />} />
         </Routes>
         <Footer />
+        <Chatbot />
         <Toaster />
       </BrowserRouter>
     </div>
